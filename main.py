@@ -1,17 +1,11 @@
 import customtkinter as ctk
 
-from app.views.main_window import MainWindow
+from app.application.application import Application
+
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("green")
 
 
-ctk.set_appearance_mode("light")
-ctk.set_default_color_theme("blue")
+app = Application()
 
-app = ctk.CTk()
-
-app.title("SMART POS")
-
-app.geometry("1400x800")
-
-MainWindow(app)
-
-app.mainloop()
+app.run()

@@ -1,11 +1,20 @@
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+"""
+File    : category.py
+Project : SMART POS
 
-from app.models.base import Base
+Model Category
+"""
+
+from dataclasses import dataclass
+from typing import Optional
 
 
-class Category(Base):
-    __tablename__ = "categories"
+@dataclass(slots=True)
+class Category:
+    """
+    Model data untuk kategori produk.
+    """
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100), unique=True)
+    id: Optional[int] = None
+    name: str = ""
+    description: str = ""

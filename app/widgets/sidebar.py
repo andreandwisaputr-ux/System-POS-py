@@ -18,7 +18,7 @@ class Sidebar(ctk.CTkFrame):
 
         title = ctk.CTkLabel(
             self,
-            text="SMART POS",
+            text="POS SYSTEM",
             font=("Segoe UI", 22, "bold")
         )
 

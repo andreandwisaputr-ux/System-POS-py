@@ -1,29 +1,61 @@
-from sqlalchemy import select
+"""
+Category Repository
+"""
 
-from app.core.database import SessionLocal
+import sqlite3
+from sqlite3 import IntegrityError  # <-- Di-import agar exception dapat tertangkap
 from app.models.category import Category
+from app.repositories.base_repository import BaseRepository
 
 
-class CategoryRepository:
+class CategoryRepository(BaseRepository):
+    """
+    Repository untuk mengelola tabel categories.
+    """
+    def add(self, category: Category) -> Category:
+        try:
+            # 1. Simpan cursor ke dalam variabel lokal!
+            cursor = self.cursor
 
-    def get_all(self):
+            # 2. Gunakan variabel cursor tersebut untuk execute
+            cursor.execute(
+                """
+                INSERT INTO categories (
+                    name,
+                    description
+                )
+                VALUES (?, ?)
+                """,
+                (
+                    category.name,
+                    category.description,
+                ),
+            )
 
-        with SessionLocal() as session:
+            # 3. Ambil lastrowid dari variabel cursor YANG SAMA
+            category.id = cursor.lastrowid
 
-            stmt = select(Category).order_by(Category.name)
-
-            return session.scalars(stmt).all()
-
-    def create(self, name):
-
-        with SessionLocal() as session:
-
-            category = Category(name=name)
-
-            session.add(category)
-
-            session.commit()
-
-            session.refresh(category)
+            # 4. Baru lakukan commit
+            self.commit()
 
             return category
+
+        except IntegrityError:
+            self.rollback()
+            raise ValueError("Nama kategori sudah digunakan.")
+  
+    def create_table(self) -> None:
+        """
+        Membuat tabel categories jika belum ada.
+        """
+        self.cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS categories (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL UNIQUE,
+                description TEXT
+            )
+            """
+        )
+
+        self.commit()
