@@ -35,8 +35,17 @@ class MainWindow(ctk.CTkFrame):
 
         # Content Area (Wadah dinamis untuk berganti halaman)
         # Diubah fg_color="transparent" agar rapi mengikuti tema warna aplikasi
-        self.content = ctk.CTkFrame(self, fg_color="transparent")
-        self.content.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
+        self.content = ctk.CTkFrame(
+        self,fg_color="transparent")
+        self.content.grid(
+            row=1,
+            column=1,
+            padx=20,
+            pady=20,
+            sticky="nsew")
+        
+        self.content.grid_rowconfigure(0, weight=1)
+        self.content.grid_columnconfigure(0, weight=1)
 
         # Halaman default saat aplikasi pertama kali dibuka
         self.show_view(DashboardView, "Dashboard")

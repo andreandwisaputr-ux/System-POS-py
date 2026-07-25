@@ -11,6 +11,31 @@ class CategoryController:
 
         return self.service.get_categories()
 
-    def add_category(self, name):
+    def add_category(
+        self,name: str,description: str):
 
-        return self.service.create_category(name)
+        return self.service.create_category(
+            name,description)
+
+    def get_all_categories(self):
+        # PERBAIKAN: Panggil service, bukan self.repository
+        return self.service.get_categories()
+    
+
+    def update_category(
+        self,
+        category_id: int,
+        name: str,
+        description: str):
+        return self.service.update_category(
+            category_id,
+            name,
+            description
+        )
+    
+    
+    def delete_category(self, category_id: int):
+
+        return self.service.delete_category(
+        category_id
+    )
