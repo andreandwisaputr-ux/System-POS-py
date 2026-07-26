@@ -1,8 +1,13 @@
-from app.controllers.category_controller import CategoryController
+from app.database.database_manager import DatabaseManager
+from app.repositories.supplier_repository import SupplierRepository
 
-controller = CategoryController()
 
-categories = controller.get_all_categories()
+db = DatabaseManager()
 
-for category in categories:
-    print(category)
+repo = SupplierRepository(db)
+
+repo.create_table()
+
+print("Tabel suppliers berhasil dibuat.")
+
+db.close()

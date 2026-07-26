@@ -3,6 +3,7 @@ import customtkinter as ctk
 from app.views.dashboard.dasboard_view import DashboardView
 from app.views.product.product_view import ProductView
 from app.views.category.category_view import CategoryView
+from app.views.supplier.supplier_views import SupplierView
 from app.widgets.sidebar import Sidebar
 from app.widgets.header import Header
 
@@ -18,7 +19,8 @@ class MainWindow(ctk.CTkFrame):
         self.routes = {
             "Dashboard": {"view": DashboardView, "title": "Dashboard"},
             "Produk": {"view": ProductView, "title": "Manajemen Produk"},
-            "Kategori": {"view": CategoryView, "title": "Manajemen Kategori"}
+            "Kategori": {"view": CategoryView, "title": "Manajemen Kategori"},
+            "Supplier": {"view": SupplierView, "title": "Manajemen Supplier"}
         }
 
         # Layout utama aplikasi

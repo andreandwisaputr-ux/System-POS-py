@@ -20,7 +20,6 @@ class CategoryView(ctk.CTkFrame):
         self.create_header()
         self.create_toolbar()
         self.create_table()
-        self.load_table()
         self.clear_table()
         self.refresh_table()
 
@@ -199,85 +198,30 @@ class CategoryView(ctk.CTkFrame):
         self.dialog.geometry("400x250")
         self.dialog.grid_columnconfigure(0, weight=1)
 
-        name_label = ctk.CTkLabel(
-        self.dialog,
-        text="Nama Kategori"
+        name_label = ctk.CTkLabel(self.dialog, text="Nama Kategori")
+        name_label.grid(row=0,column=0,padx=20,pady=(20, 5),sticky="w"
         )
-        name_label.grid(
-            row=0,
-            column=0,
-            padx=20,
-            pady=(20, 5),
-            sticky="w"
-        )
-        self.name_entry = ctk.CTkEntry(
-        self.dialog
-        )
-
-        self.name_entry.grid(
-            row=1,
-            column=0,
-            padx=20,
-            sticky="ew"
-        )
+        self.name_entry = ctk.CTkEntry(self.dialog)
+        self.name_entry.grid(row=1,column=0,padx=20,sticky="ew")
 
 
-        description_label = ctk.CTkLabel(
-        self.dialog,
-            text="Deskripsi"
+        description_label = ctk.CTkLabel(self.dialog,text="Deskripsi")
+        description_label.grid(row=2,column=0,padx=20,pady=(15, 5),sticky="w")
+
+        self.description_entry = ctk.CTkEntry(self.dialog)
+        self.description_entry.grid(row=3,column=0,padx=20,sticky="ew")
+
+        button_frame = ctk.CTkFrame(self.dialog,fg_color="transparent"
         )
-        description_label.grid(
-            row=2,
-            column=0,
-            padx=20,
-            pady=(15, 5),
-            sticky="w"
+        button_frame.grid(row=4,column=0, padx=20, pady=20,sticky="e"
         )
 
-        self.description_entry = ctk.CTkEntry(
-        self.dialog
-        )
-        self.description_entry.grid(
-        row=3,
-        column=0,
-        padx=20,
-        sticky="ew"
-        )
+        save_button = ctk.CTkButton(button_frame,text="Simpan",command=self.save_category)
+        save_button.pack(side="left",padx=(0, 10))
 
-        button_frame = ctk.CTkFrame(
-        self.dialog,
-        fg_color="transparent"
-        )
+        cancel_button = ctk.CTkButton(button_frame,text="Batal",command=self.dialog.destroy)
+        cancel_button.pack(side="left")
 
-        button_frame.grid(
-            row=4,
-            column=0,
-            padx=20,
-            pady=20,
-            sticky="e"
-        )
-
-        save_button = ctk.CTkButton(
-        button_frame,
-        text="Simpan",
-        command=self.save_category
-        )
-
-        save_button.pack(
-            side="left",
-            padx=(0, 10)
-        )
-
-
-        cancel_button = ctk.CTkButton(
-            button_frame,
-            text="Batal",
-            command=self.dialog.destroy
-        )
-
-        cancel_button.pack(
-            side="left"
-        )
 
     def save_category(self):
 

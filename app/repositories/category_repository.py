@@ -164,7 +164,7 @@ class CategoryRepository(BaseRepository):
         cursor = self.cursor
 
         cursor.execute(
-            """
+            """         
             DELETE FROM categories
             WHERE id = ?
             """,
